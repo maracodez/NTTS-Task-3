@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+
+<html data-theme="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DevPort | High-Performance Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;family=Geist:wght@100..900&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        :root {
+            /* Design System Tokens */
+            --primary: #8b5cf6; /* Electric Violet - Dark Mode Default */
+            --on-primary: #ffffff;
+            --secondary: #4cd7f6; /* Cyber Cyan */
+            --on-secondary: #003640;
+            --background: #051424; /* Synthetic Slate */
+            --on-background: #d4e4fa;
+            --surface: rgba(5, 20, 36, 0.7);
+            --surface-container-low: #0d1c2d;
+            --surface-container-lowest: #010f1f;
+            --on-surface: #d4e4fa;
+            --on-surface-variant: #cbc3d7;
+            --outline: #958ea0;
+            --outline-variant: rgba(73, 68, 84, 0.1);
+            
+            --radius-default: 0.125rem;
+            --radius-lg: 0.25rem;
+            --radius-xl: 0.5rem;
+            --radius-full: 9999px;
+
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 2rem;
+            --space-lg: 4rem;
+            --space-xl: 8rem;
+            --gutter: 1.5rem;
+            --max-width: 1200px;
+
+            --font-body: 'Inter', sans-serif;
+            --font-display: 'Inter', sans-serif;
+            --font-caps: 'Geist', sans-serif;
+
+            --transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        [data-theme="light"] {
+            --primary: #06b6d4; /* Cyber Cyan */
+            --secondary: #06b6d4;
+            --background: #ffffff;
+            --on-background: #0f172a;
+            --surface: rgba(255, 255, 255, 0.8);
+            --surface-container-low: #f8fafc;
+            --surface-container-lowest: #ffffff;
+            --on-surface: #1e293b;
+            --on-surface-variant: #64748b;
+            --outline: #cbd5e1;
+            --outline-variant: rgba(15, 23, 42, 0.1);
+        }
+
+        /* Reset & Base Styles */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            background-color: var(--background);
+            color: var(--on-background);
+            line-height: 1.75;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 var(--gutter);
+        }
+
+        /* Typography Classes */
+        .text-display { font-family: var(--font-display); font-size: 2.5rem; font-weight: 800; line-height: 1.2; letter-spacing: -0.02em; }
+        @media (min-width: 768px) { .text-display { font-size: 4rem; } }
+        
+        .text-headline { font-size: 2rem; font-weight: 700; line-height: 1.3; }
+        .text-body-lg { font-size: 1.125rem; }
+        .text-body-sm { font-size: 0.875rem; }
+        .text-label-caps { font-family: var(--font-caps); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
+
+        /* Component Styles */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 50;
+            background: var(--surface);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--outline-variant);
+            height: 72px;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -0.05em;
+            transition: var(--transition);
+        }
+
+        .nav-links { display: none; gap: var(--space-md); align-items: center; }
+        @media (min-width: 768px) { .nav-links { display: flex; } }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--on-surface-variant);
+            transition: var(--transition);
+        }
+        .nav-link:hover { color: var(--primary); }
+        .nav-active { color: var(--primary); font-weight: 700; border-bottom: 2px solid var(--primary); padding-bottom: 4px; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-full);
+            font-family: var(--font-caps);
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--on-primary);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+        }
+        [data-theme="light"] .btn-primary { box-shadow: 0 0 20px rgba(6, 182, 212, 0.3); }
+        .btn-primary:hover { transform: scale(1.05); opacity: 0.9; }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+        }
+        .btn-outline:hover { background: rgba(76, 215, 246, 0.1); transform: scale(1.05); }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: var(--radius-xl);
+            padding: var(--space-md);
+            transition: var(--transition);
+        }
+        [data-theme="light"] .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(15, 23, 42, 0.1);
+        }
+
+        /* Reveal Animation */
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Sections */
+        section { padding: var(--space-xl) 0; }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 72px;
+        }
+        .hero-content { max-width: 800px; margin: 0 auto; }
+        .hero-title { margin-bottom: var(--space-sm); }
+        .hero-title span { color: var(--primary); }
+        .hero-desc { color: var(--on-surface-variant); margin-bottom: var(--space-md); max-width: 600px; margin-left: auto; margin-right: auto; }
+        .hero-btns { display: flex; flex-direction: column; gap: var(--space-sm); justify-content: center; }
+        @media (min-width: 768px) { .hero-btns { flex-direction: row; } .btn-hero { padding: 1rem 3rem; } }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-xl);
+        }
+        @media (min-width: 1024px) { .about-grid { grid-template-columns: 1fr 1fr; } }
+
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-sm);
+        }
+        @media (min-width: 768px) { .tech-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        .tech-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-sm);
+            text-align: center;
+        }
+        .tech-card:hover { transform: scale(1.1); border-color: var(--primary); }
+        .tech-card .material-symbols-outlined { font-size: 2.5rem; color: var(--primary); }
+
+        .projects { background: var(--surface-container-lowest); opacity: 0.95; }
+        .projects-header { margin-bottom: var(--space-lg); }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--gutter);
+        }
+        @media (min-width: 768px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .projects-grid { grid-template-columns: repeat(3, 1fr); } }
+
+        .project-card {
+            overflow: hidden;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .project-img {
+            height: 224px;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            transition: transform 0.7s ease;
+        }
+        .project-card:hover .project-img { transform: scale(1.1); }
+        .project-img::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, var(--background), transparent);
+            opacity: 0.6;
+        }
+        .project-info { padding: var(--space-md); flex-grow: 1; display: flex; flex-direction: column; }
+        .project-tags { display: flex; gap: var(--space-xs); margin-bottom: var(--space-sm); }
+        .tag {
+            padding: 2px 8px;
+            font-size: 10px;
+            border-radius: 4px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--primary);
+            font-family: var(--font-caps);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-xl);
+            align-items: center;
+        }
+        @media (min-width: 1024px) { .contact-grid { grid-template-columns: 1fr 1fr; } }
+
+        .contact-form {
+            border-left: 4px solid var(--primary);
+        }
+        .form-group { margin-bottom: var(--space-md); }
+        .form-label { display: block; margin-bottom: var(--space-xs); color: var(--on-surface-variant); }
+        .form-input {
+            width: 100%;
+            background: var(--surface-container-low);
+            border: none;
+            border-bottom: 1px solid var(--outline);
+            color: var(--on-surface);
+            padding: var(--space-xs) 0;
+            outline: none;
+            transition: var(--transition);
+        }
+        .form-input:focus { border-bottom-color: var(--primary); }
+
+        .footer {
+            padding: var(--space-xl) 0;
+            border-top: 1px solid var(--outline-variant);
+            background: var(--surface-container-lowest);
+        }
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-md);
+            text-align: center;
+        }
+        @media (min-width: 768px) {
+            .footer-content { flex-direction: row; justify-content: space-between; text-align: left; }
+        }
+        .social-links { display: flex; gap: var(--space-md); }
+        .social-link { color: var(--on-surface-variant); transition: var(--transition); }
+        .social-link:hover { color: var(--primary); }
+        .social-link svg { width: 24px; height: 24px; fill: currentColor; }
+
+        /* Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+        .floating { animation: float 6s ease-in-out infinite; }
+
+        /* Theme Toggle Icon Fix */
+        .theme-toggle-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            padding: var(--space-xs);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-full);
+            transition: var(--transition);
+        }
+        .theme-toggle-btn:hover { background: rgba(139, 92, 246, 0.1); }
+        .hidden { display: none !important; }
+
+        /* Mobile Menu */
+        .mobile-menu-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 20, 36, 0.95);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-lg);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu-overlay.active { transform: translateX(0); }
+        .mobile-close { position: absolute; top: 1.5rem; right: 1.5rem; color: var(--primary); border: none; background: none; cursor: pointer; }
+        .mobile-nav-link { font-size: 2.5rem; font-weight: 800; color: var(--primary); text-decoration: none; }
+        
+        .mobile-controls { display: flex; align-items: center; gap: var(--space-xs); }
+        @media (min-width: 768px) { .mobile-controls { display: none; } }
+        #menu-toggle { background: none; border: none; color: var(--primary); cursor: pointer; }
+
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body>
+<header class="navbar">
+    <nav class="container navbar-content">
+        <a class="logo" href="#home">DevPort</a>
+        <div class="nav-links">
+        <a class="nav-link nav-active text-label-caps" href="#home">HOME</a>
+        <a class="nav-link text-label-caps" href="#about">ABOUT</a>
+        <a class="nav-link text-label-caps" href="#projects">PROJECTS</a>
+        <a class="nav-link text-label-caps" href="#contact">CONTACT</a>
+        <button aria-label="Toggle Theme" class="theme-toggle-btn" id="theme-toggle">
+        <span class="material-symbols-outlined" id="dark-icon">light_mode</span>
+        <span class="material-symbols-outlined hidden" id="light-icon">dark_mode</span>
+        </button>
+        <a class="btn btn-primary" href="#">RESUME</a>
+        </div>
+        <div class="mobile-controls">
+        <button aria-label="Toggle Theme" class="theme-toggle-btn" id="theme-toggle-mobile">
+        <span class="material-symbols-outlined">light_mode</span>
+        </button>
+        <button id="menu-toggle">
+        <span class="material-symbols-outlined">menu</span>
+        </button>
+        </div>
+    </nav>
+</header>
+<div class="mobile-menu-overlay" id="mobile-menu">
+    <button class="mobile-close" id="menu-close">
+    <span class="material-symbols-outlined" style="font-size: 2rem;">close</span>
+    </button>
+    <a class="mobile-nav-link" href="#home">Home</a>
+    <a class="mobile-nav-link" href="#about">About</a>
+    <a class="mobile-nav-link" href="#projects">Projects</a>
+    <a class="mobile-nav-link" href="#contact">Contact</a>
+</div>
+<main>
+<section class="hero" id="home">
+    <div class="container hero-content reveal">
+    <h1 class="text-display hero-title">
+                    Building Interactive Web Experiences with <span>Precision</span>
+    </h1>
+    <p class="text-body-lg hero-desc">
+                    Hello, I'm a Frontend Developer dedicated to creating lightning-fast, visually stunning, and highly functional digital environments.
+                </p>
+    <div class="hero-btns">
+    <a class="btn btn-primary btn-hero" href="#projects">VIEW MY WORK</a>
+    <a class="btn btn-outline btn-hero" href="#">RESUME</a>
+    </div>
+    <div class="floating" style="margin-top: 4rem;">
+    <span class="material-symbols-outlined" style="color: var(--primary); font-size: 2.5rem;">keyboard_double_arrow_down</span>
+    </div>
+    </div>
+</section>
+<section id="about">
+<div class="container about-grid">
+<div class="reveal">
+<h2 class="text-headline" style="color: var(--primary); margin-bottom: var(--space-sm);">Technical Evolution</h2>
+<p class="text-body-lg" style="color: var(--on-surface-variant); margin-bottom: var(--space-sm);">
+                    I specialize in bridging the gap between design and high-performance engineering. My approach is rooted in code modularity, accessibility, and pixel-perfect execution.
+                </p>
+<p class="text-body-lg" style="color: var(--on-surface-variant);">
+                    With an obsession for performance metrics and user-centric flows, I transform complex requirements into elegant, scalable web applications that thrive in the modern browser ecosystem.
+                </p>
+</div>
+<div class="tech-grid reveal">
+<div class="glass-card tech-card">
+<span class="material-symbols-outlined">code</span>
+<span class="text-label-caps">JAVASCRIPT</span>
+</div>
+<div class="glass-card tech-card">
+<span class="material-symbols-outlined" style="color: var(--secondary);">css</span>
+<span class="text-label-caps">CSS3</span>
+</div>
+<div class="glass-card tech-card">
+<span class="material-symbols-outlined">html</span>
+<span class="text-label-caps">HTML5</span>
+</div>
+<div class="glass-card tech-card">
+<span class="material-symbols-outlined" style="color: var(--secondary);">history</span>
+<span class="text-label-caps">GIT</span>
+</div>
+<div class="glass-card tech-card">
+<span class="material-symbols-outlined">layers</span>
+<span class="text-label-caps">REACT</span>
+</div>
+<div class="glass-card tech-card">
+<span class="material-symbols-outlined" style="color: var(--secondary);">bolt</span>
+<span class="text-label-caps">TAILWIND</span>
+</div>
+</div>
+</div>
+</section>
+<section class="projects" id="projects">
+<div class="container">
+<div class="projects-header reveal">
+<h2 class="text-headline">Selected Projects</h2>
+<p class="text-label-caps" style="color: var(--primary); margin-top: var(--space-xs);">Production-Grade Software</p>
+</div>
+<div class="projects-grid">
+<div class="glass-card project-card reveal">
+<div class="project-img" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDFwyWiKGR0are-9MEUCDBK8mPfEB8dCF7D6YdjLKkW2Ndfri1kpw4glGcdhGvQLTuvZxnZ_5Kmp3D1JfWBlXW0y7fSNQd6HOONXW2tZ98wdeQPDHTV_Cui9M1R9-Tbcsu_EOiMXBlVsOxteNJ_ln9J_ZdvjzL1H9N2GEAJv7rAVPm-LJsbVBAOR5R5MMb14WLOFCIYthdtFUl0dBZzOK7Wv__nL24JKthPGimZ-7pANqI_3ZlsPrtE1kQ_G51N5s5jliXJVpWkdx0')"></div>
+<div class="project-info">
+<div class="project-tags">
+<span class="tag">JS</span>
+<span class="tag" style="background: rgba(76, 215, 246, 0.1); color: var(--secondary); border-color: rgba(76, 215, 246, 0.2);">REDUX</span>
+</div>
+<h3 class="text-headline" style="font-size: 1.5rem; margin-bottom: var(--space-xs);">Neural Network UI</h3>
+<p class="text-body-sm" style="color: var(--on-surface-variant); margin-bottom: var(--space-md);">A real-time data visualization platform for monitoring large-scale machine learning models across clusters.</p>
+<div style="margin-top: auto; display: flex; justify-content: space-between; align-items: center;">
+<a class="text-label-caps" href="#" style="color: var(--secondary); text-decoration: none; display: flex; align-items: center; gap: 4px;">LIVE DEMO <span class="material-symbols-outlined" style="font-size: 0.875rem;">north_east</span></a>
+<a href="#" style="color: var(--on-surface-variant);"><span class="material-symbols-outlined">terminal</span></a>
+</div>
+</div>
+</div>
+<div class="glass-card project-card reveal" style="transition-delay: 0.1s;">
+<div class="project-img" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD6PtaAFOWmlFpnhipPzrICoAFnu_GUe2q4UB76L3I1e8EfjeHQhDwLsmriauqW62AZBnHsPdVBc-I9HXdiuI4zhQwT1RobqObi03UlbIL8X6_cmiSe752PPfbuOiECTRuyKpRuMxvanA2KFceL1XA_b8n_zCqqpRJ6VMZJJ9-TIeGj0JeuofP4O3VbPVtaojuKYj0VpQJOr1VNOTDNka6y0uKZMjuEsXIn5MBdGfCPib1de0rJpW7QYr6QrsAql_MXgCoHr0XQQTo')"></div>
+<div class="project-info">
+<div class="project-tags">
+<span class="tag">REACT</span>
+<span class="tag" style="background: rgba(76, 215, 246, 0.1); color: var(--secondary); border-color: rgba(76, 215, 246, 0.2);">THREE.JS</span>
+</div>
+<h3 class="text-headline" style="font-size: 1.5rem; margin-bottom: var(--space-xs);">Obsidian CRM</h3>
+<p class="text-body-sm" style="color: var(--on-surface-variant); margin-bottom: var(--space-md);">High-performance customer relationship manager with a focused, minimal interface and encrypted data storage.</p>
+<div style="margin-top: auto; display: flex; justify-content: space-between; align-items: center;">
+<a class="text-label-caps" href="#" style="color: var(--secondary); text-decoration: none; display: flex; align-items: center; gap: 4px;">LIVE DEMO <span class="material-symbols-outlined" style="font-size: 0.875rem;">north_east</span></a>
+<a href="#" style="color: var(--on-surface-variant);"><span class="material-symbols-outlined">terminal</span></a>
+</div>
+</div>
+</div>
+<div class="glass-card project-card reveal" style="transition-delay: 0.2s;">
+<div class="project-img" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAz0jz_qRwqEdqp_ozqJ3Clcsnhw5IpXcOD89vhEkK_E5juRxstJwVKPP25JoIbQ1oBAuZzBNye9jghA1Dt2q_gIa3R1IwkIrwv1yNyRflzrNxf2TyWcF8oegKcpYVAdcwUTbTIRsPG-hmQ-yI3ZJJfQoqKb-0uL_R5G_vgcRoNzPPaFNquU-UOYtalIqPCrOGHf5R7nMQFvLWYyJEyX6-4iDXQuKJn7kopXr2F40Hvep1XuZaQmlL4OF9Qt6y3UtUbtcS_K_wsmEI')"></div>
+<div class="project-info">
+<div class="project-tags">
+<span class="tag">VUE</span>
+<span class="tag" style="background: rgba(76, 215, 246, 0.1); color: var(--secondary); border-color: rgba(76, 215, 246, 0.2);">D3.JS</span>
+</div>
+<h3 class="text-headline" style="font-size: 1.5rem; margin-bottom: var(--space-xs);">Nova Finance</h3>
+<p class="text-body-sm" style="color: var(--on-surface-variant); margin-bottom: var(--space-md);">Decentralized finance dashboard featuring live market analytics and lightning-fast transaction history feeds.</p>
+<div style="margin-top: auto; display: flex; justify-content: space-between; align-items: center;">
+<a class="text-label-caps" href="#" style="color: var(--secondary); text-decoration: none; display: flex; align-items: center; gap: 4px;">LIVE DEMO <span class="material-symbols-outlined" style="font-size: 0.875rem;">north_east</span></a>
+<a href="#" style="color: var(--on-surface-variant);"><span class="material-symbols-outlined">terminal</span></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="contact">
+<div class="container contact-grid reveal">
+<div>
+<h2 class="text-display" style="margin-bottom: var(--space-sm);">Let's build <span style="color: var(--secondary);">something</span> great.</h2>
+<p class="text-body-lg" style="color: var(--on-surface-variant); margin-bottom: var(--space-lg);">
+                    Currently available for freelance projects and full-time technical opportunities. I'm always looking for ambitious projects with modern stacks.
+                </p>
+<div style="display: flex; flex-direction: column; gap: var(--space-sm);">
+<div style="display: flex; align-items: center; gap: var(--space-sm);">
+<div class="glass-card" style="width: 48px; height: 48px; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--primary);">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<span class="text-body-lg">hello@devport.tech</span>
+</div>
+<div style="display: flex; align-items: center; gap: var(--space-sm);">
+<div class="glass-card" style="width: 48px; height: 48px; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: var(--secondary);">
+<span class="material-symbols-outlined">location_on</span>
+</div>
+<span class="text-body-lg">Silicon Valley, CA</span>
+</div>
+</div>
+</div>
+<div class="glass-card contact-form">
+<form id="contact-form">
+<div class="form-group">
+<label class="form-label text-label-caps">YOUR NAME</label>
+<input class="form-input" id="name" placeholder="John Doe" required="" type="text"/>
+</div>
+<div class="form-group">
+<label class="form-label text-label-caps">EMAIL ADDRESS</label>
+<input class="form-input" id="email" placeholder="john@example.com" required="" type="email"/>
+</div>
+<div class="form-group">
+<label class="form-label text-label-caps">MESSAGE</label>
+<textarea class="form-input" id="message" placeholder="Tell me about your project..." required="" rows="4"></textarea>
+</div>
+<button class="btn btn-primary" style="width: 100%; padding: 1rem; border-radius: var(--radius-xl);" type="submit">SEND MESSAGE</button>
+</form>
+<div class="hidden" id="form-success" style="text-align: center; padding: 2rem;">
+<span class="material-symbols-outlined" style="color: var(--primary); font-size: 4rem; margin-bottom: 1rem;">check_circle</span>
+<h3 class="text-headline">Message Transmitted</h3>
+<p style="color: var(--on-surface-variant); margin-bottom: 1.5rem;">I'll get back to you shortly.</p>
+<button class="text-label-caps" onclick="resetForm()" style="background: none; border: none; color: var(--secondary); border-bottom: 1px solid var(--secondary); cursor: pointer;">SEND ANOTHER</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="footer">
+<div class="container footer-content">
+<div>
+<p class="text-label-caps" style="font-weight: 800; margin-bottom: 4px;">DEVPORT</p>
+<p class="text-body-sm" style="color: var(--on-surface-variant);">© <span id="current-year"></span> DevPort. Built with precision and neon.</p>
+</div>
+<div class="social-links">
+<a class="social-link" href="#">
+<svg viewbox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg>
+</a>
+<a class="social-link" href="#" style="color: var(--secondary);">
+<svg viewbox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+</a>
+<a class="social-link" href="#">
+<svg viewbox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
+</a>
+</div>
+</div>
+</footer>
+<script>
+    // 1. Theme Toggle Logic
+    const html = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+    const darkIcon = document.getElementById('dark-icon');
+    const lightIcon = document.getElementById('light-icon');
+    
+    function updateThemeIcons() {
+        const isDark = html.getAttribute('data-theme') === 'dark';
+        if (darkIcon && lightIcon) {
+            darkIcon.classList.toggle('hidden', !isDark);
+            lightIcon.classList.toggle('hidden', isDark);
+        }
+    }
+
+    function toggleTheme() {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcons();
+    }
+
+    // Initialize theme
+    const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    html.setAttribute('data-theme', savedTheme);
+    updateThemeIcons();
+
+    themeToggle.addEventListener('click', toggleTheme);
+    themeToggleMobile.addEventListener('click', toggleTheme);
+
+    // 2. Reveal Animations
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // 3. Mobile Menu
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuClose = document.getElementById('menu-close');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+    
+    const closeMenu = () => {
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+    };
+
+    menuClose.addEventListener('click', closeMenu);
+    document.querySelectorAll('.mobile-nav-link').forEach(link => link.addEventListener('click', closeMenu));
+
+    // 4. Form Logic
+    const contactForm = document.getElementById('contact-form');
+    const formSuccess = document.getElementById('form-success');
+
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const btn = contactForm.querySelector('button');
+        const originalText = btn.innerText;
+        btn.innerText = "TRANSMITTING...";
+        btn.disabled = true;
+
+        setTimeout(() => {
+            contactForm.classList.add('hidden');
+            formSuccess.classList.remove('hidden');
+            btn.innerText = originalText;
+            btn.disabled = false;
+        }, 1500);
+    });
+
+    window.resetForm = () => {
+        contactForm.reset();
+        contactForm.classList.remove('hidden');
+        formSuccess.classList.add('hidden');
+    }
+
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // 5. Active Nav Highlight
+    window.addEventListener('scroll', () => {
+        let current = "";
+        document.querySelectorAll('section').forEach(section => {
+            if (window.pageYOffset >= (section.offsetTop - 200)) {
+                current = section.getAttribute('id');
+            }
+        });
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.classList.remove('nav-active');
+            if (link.getAttribute('href').includes(current)) link.classList.add('nav-active');
+        });
+    });
+</script>
+</body></html>

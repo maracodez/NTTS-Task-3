@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Mara | Frontend Developer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&amp;family=Geist:wght@400;600&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+</head>
+<body>
+    <header class="navbar">
+        <nav class="container navbar-content">
+            <a class="logo" href="#home">Mara</a>
+            <section class="nav-links">
+                <a class="nav-link nav-active text-label-caps" href="#home">HOME</a>
+                <a class="nav-link text-label-caps" href="#about">ABOUT</a>
+                <a class="nav-link text-label-caps" href="#projects">PROJECTS</a>
+                <a class="nav-link text-label-caps" href="#contact">CONTACT</a>
+                <a class="btn btn-primary" href="#">RESUME</a>
+            </section>
+            <section class="mobile-controls">
+                <button id="menu-toggle">
+                    <span class="material-symbols-outlined">&#9779;</span>
+                </button>
+            </section>
+        </nav>
+    </header>
+    <section class="mobile-menu-overlay" id="mobile-menu">
+        <button class="mobile-close" id="menu-close">
+        <span class="material-symbols-outlined" style="font-size: 2rem;">&#10006;</span>
+        </button>
+        <a class="mobile-nav-link" href="#home">Home</a>
+        <a class="mobile-nav-link" href="#about">About</a>
+        <a class="mobile-nav-link" href="#projects">Projects</a>
+        <a class="mobile-nav-link" href="#contact">Contact</a>
+    </section>
+    <main>
+        <section class="hero" id="home">
+            <div class="container hero-content reveal">
+                <h1 class="text-display hero-title">
+                    Building Interactive Web Experiences with <span>Precision</span>
+                </h1>
+                <p class="text-body-lg hero-desc">
+                    Hello, I'm a Frontend Developer dedicated to creating lightning-fast, visually stunning, and highly functional digital environments.
+                </p>
+                <div class="hero-btns">
+                    <a class="btn btn-primary btn-hero" href="#projects">VIEW MY WORK</a>
+                    <a class="btn btn-outline btn-hero" href="#">RESUME</a>
+                </div>
+            </div>
+        </section>
+        <section id="about">
+            <div class="container about-grid">
+                <div class="reveal">
+                    <h2 class="text-headline" style="color: var(--primary); margin-bottom: var(--space-sm);">About Me</h2>
+                    <p class="text-body-lg" style="color: var(--on-surface-variant); margin-bottom: var(--space-sm);">
+                       I am a developer driven by technical precision and the industrial stability of modern software architecture. My interests lie at the intersection of reactive state management and high-performance rendering. 
+                        I specialize in building complex web applications that remain fluid and accessible across all devices. 
+                    </p>
+                    <p class="text-body-lg" style="color: var(--on-surface-variant);">
+                       When I'm not optimizing render cycles, I'm exploring the latest trends in UI design systems and glassmorphic aesthetics to ensure my products aren't just fast, but visually arresting.
+                    </p>
+                </div>
+                <div class="image-wrapper">
+                    <p class="about-image">
+                        <img data-alt="A professional, high-tech workspace of a software developer in a dark room. The desk features multiple ultra-wide monitors displaying complex code structures in neon violet and cyan syntax. A mechanical keyboard glows softly. The lighting is low-key, emphasizing a cyber-industrial aesthetic with subtle depth of field and premium hardware." src="assests/profile1 (2).jpg"/>
+                    </p>
+                </div>
+            </div>
+        </section>
+        <!-- Skills Section -->
+        <section class="skills-section reveal">
+            <div class="container">
+                <div class="skills-header">
+                    <h2>Technical Arsenal</h2>
+                    <div class="skills-divider"></div>
+                </div>
+                <div class="skills-grid">
+                    <div class="glass-card skill-tag">
+                        <span class="material-symbols-outlined">html</span>
+                        <span>HTML5</span>
+                    </div>
+                    <div class="glass-card skill-tag">
+                        <img src="./assests/css.png" alt="">
+                        <span>CSS3</span>
+                    </div>
+                    <div class="glass-card skill-tag">
+                        <img src="./assests/js.png" alt="">
+                        <span>JavaScript</span>
+                    </div>
+                    <div class="glass-card skill-tag">
+                        <span class="material-symbols-outlined">TS</span>
+                        <span>TypeScript</span>
+                    </div>
+                    <div class="glass-card skill-tag">
+                        <img src="./assests/react.png" alt="">
+                        <span>React</span>
+                    </div>
+                    <div class="glass-card skill-tag">
+                        <span class="material-symbols-outlined">style</span>
+                        <span>Tailwind</span>
+                    </div>
+                    <div class="glass-card skill-tag">
+                        <span class="material-symbols-outlined">terminal</span>
+                        <span>Git</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section class="container projects-section reveal" id="projects">
+            <h2 class="projects-title">Featured Projects</h2>
+            <main class="projects-grid">
+                <!-- Project 1 -->
+                <section class="glass-card project-card">
+                    <div class="project-image">
+                        <img data-alt="A futuristic dashboard UI for a data analytics platform. The interface features translucent glass cards, neon-lit line charts in Electric Violet, and a deep slate background. The design is sleek, industrial, and high-contrast, representing a sophisticated technical tool for engineers." src="./assests/fashion.png"/>
+                        <div class="project-overlay"></div>
+                    </div>
+                    <div class="project-info">
+                    <h3 class="project-name">Fashion Hub</h3>
+                    <p class="project-desc">A web app for visualizing fashion data. View your various latest styles, materials, sewing equipements and detailed fashion information about each style. Add and purchase new items of recommended styles based on the existing trends and more.</p>
+                    <div class="project-actions">
+                    <button class="btn-project">View Project</button>
+                    <a class="project-code-link" href="#">
+                    <span class="material-symbols-outlined">code</span>
+                    </a>
+                    </div>
+                    </div>
+                </section>
+                <!-- Project 2 -->
+                <section class="glass-card project-card">
+                    <div class="project-image">
+                        <img data-alt="A conceptual mobile application for a technical portfolio hub. The screen shows a grid of sleek project cards with obsidian textures and cyber-cyan accents. The atmosphere is professional and tech-forward, with soft glowing highlights and sharp typography." src="./assests/dog-breed.png"/>
+                        <div class="project-overlay"></div>
+                    </div>
+                    <div class="project-info">
+                        <h3 class="project-name">Dog Breed</h3>
+                        <p class="project-desc">A web app for visualizing animal(dog breed) specie. View your dog breeds, their specie, images, names and detailed information about each breed. Search desired dog breed which are not showcased on the dashboard and more.</p>
+                        <div class="project-actions">
+                            <button class="btn-project">View Project</button>
+                            <a class="project-code-link" href="#">
+                                <span class="material-symbols-outlined">code</span>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </section>
+        <!-- Contact Section -->
+        <section class="contact-section reveal" id="contact">
+            <div class="container contact-grid">
+                <div class="contact-info">
+                    <h2>Initiate Contact</h2>
+                    <p>Looking to collaborate on a high-performance project or just want to talk about technical architecture? Drop a message below.</p>
+                    <p class="contact-methods">
+                        <div class="contact-method">
+                            <div class="contact-icon">
+                                <span class="material-symbols-outlined">
+                                    <img src="./assests/Mail.png" alt="" style="background-color: var(--primary);">
+                                </span>
+                            </div>
+                            <span class="contact-label">amarachiruhty4@gmail.com</span>
+                        </div>
+                    </p>
+                    <p class="social-links">
+                        <a class="social-link" href="#">
+                            <span class="material-symbols-outlined">link</span>
+                        </a>
+                        <a class="social-link" href="#">
+                            <span class="material-symbols-outlined">terminal</span>
+                        </a>
+                        <a class="social-link" href="#">
+                            <span class="material-symbols-outlined">public</span>
+                        </a>
+                    </p>
+                </div>
+                <form class="glass-card contact-form">
+                    <p class="form-group">
+                        <label for="name">Name</label>
+                        <input id="name" placeholder="John Doe" type="text"/>
+                    </p>
+                    <p class="form-group">
+                        <label for="email">Email</label>
+                        <input id="email" placeholder="john@example.com" type="email"/>
+                    </p>
+                    <p class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" placeholder="Tell me about your project..." rows="4"></textarea>
+                    </p>
+                    <button class="btn-submit" type="submit">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <div class="footer-logo">Mara</div>
+            <small class="copyright">
+                © 2026 Mara. All rights reserved.
+            </small>
+            <div class="footer-links">
+                <a class="footer-link" href="#">GitHub</a>
+                <a class="footer-link" href="#">LinkedIn</a>
+                <a class="footer-link" href="#">Twitter</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
